@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -37,6 +40,7 @@ public class TimelineActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         populateTimeline();
+        Toast.makeText(getApplicationContext(), "POPULATING...", Toast.LENGTH_LONG).show();
     }
 
     private void populateTimeline() {
@@ -82,5 +86,33 @@ public class TimelineActivity extends AppCompatActivity {
                 Log.d(TAG, errorResponse.toString());
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.timeline, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        Toast toast = Toast.makeText(getApplicationContext(),"Option 1", Toast.LENGTH_SHORT);
+
+
+        switch(item.getItemId()) {
+            case R.id.refreshMenuOption:
+                Log.i(TAG, "pressed");
+                String title = getSupportActionBar().getTitle().toString();
+                getSupportActionBar().setTitle("Refreshing.....");
+                populateTimeline();
+                getSupportActionBar().setTitle(title);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
