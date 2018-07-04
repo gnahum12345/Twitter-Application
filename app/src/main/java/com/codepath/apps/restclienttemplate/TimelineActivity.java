@@ -1,5 +1,9 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -27,6 +32,7 @@ public class TimelineActivity extends AppCompatActivity {
     TweetAdapter adapter;
     ArrayList<Tweet> dataSource;
     RecyclerView recyclerView;
+    FloatingActionButton fab;
 
     private static String TAG = "TWITTERDEBUGGING";
     @Override
@@ -41,6 +47,16 @@ public class TimelineActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         populateTimeline();
         Toast.makeText(getApplicationContext(), "POPULATING...", Toast.LENGTH_LONG).show();
+        fab = findViewById(R.id.fabCompose);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "COMPOSE...", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.baby_blue)));
+
     }
 
     private void populateTimeline() {
@@ -92,6 +108,7 @@ public class TimelineActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.timeline, menu);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#89cff0")));
         return true;
     }
 
