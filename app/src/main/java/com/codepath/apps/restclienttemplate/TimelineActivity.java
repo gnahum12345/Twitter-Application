@@ -1,5 +1,6 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -20,7 +21,9 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
@@ -33,6 +36,9 @@ public class TimelineActivity extends AppCompatActivity {
     ArrayList<Tweet> dataSource;
     RecyclerView recyclerView;
     FloatingActionButton fab;
+
+    private final int COMPOSE_REQUEST_CODE = 10;
+    private final int COMPOSE_RESULT_CODE = 20;
 
     private static String TAG = "TWITTERDEBUGGING";
     @Override
@@ -52,6 +58,8 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "COMPOSE...", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(TimelineActivity.this, ComposeActivity.class);
+                startActivityForResult(intent, COMPOSE_REQUEST_CODE);
             }
         });
 
@@ -131,5 +139,22 @@ public class TimelineActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == COMPOSE_REQUEST_CODE && resultCode == COMPOSE_RESULT_CODE) {
+            Tweet newTweet = Parcels.unwrap(data.getParcelableExtra("newTweet"));
+            dataUpdated(newTweet);
+        }
+    }
+
+    public synchronized void dataUpdated(Tweet newTweet) {
+        dataSource.add(0, newTweet);
+        adapter.notifyItemChanged(0);
+        recyclerView.scrollToPosition(0);
     }
 }

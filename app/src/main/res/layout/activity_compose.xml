@@ -6,14 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".ComposeActivity">
 
+
+    <!--<com.codepath.apps.restclienttemplate.ComposeText-->
+        <!--android:id="@+id/etTweet"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="91dp"-->
+        <!--android:layout_above="@+id/tvCounter"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginBottom="12dp"-->
+        <!--android:ems="10"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:text="Name" />-->
+
+    <com.codepath.apps.restclienttemplate.ComposeText
+        android:id="@+id/etBody"
+        android:layout_width="334dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:hint="What's...?"
+        android:inputType="textMultiLine"
+        android:textColor="#777"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvCounter"
         android:layout_width="79dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="103dp"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="140 char left" />
+
+    <Button
+        android:id="@+id/cancelCompose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="139dp"
+        android:text="Cancel" />
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,6 +14,7 @@ import java.util.Locale;
 
 import static android.support.constraint.Constraints.TAG;
 
+@Parcel
 public class Tweet {
 
     public Long uid;
